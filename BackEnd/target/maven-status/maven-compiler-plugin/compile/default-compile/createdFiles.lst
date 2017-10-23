@@ -1,0 +1,13 @@
+com\dao\ProductDaoImplementation.class
+com\model\Category.class
+com\dao\CategoryDao.class
+com\model\Product.class
+com\dao\ProductDao.class
+com\dao\CategoryDaoImplementation.class
+com\dao\UserDao.class
+com\dao\SupplierDaoImplementation.class
+com\dao\UserDaoImplementaion.class
+com\model\Supplier.class
+com\model\User.class
+com\configuration\HibernateConfiguration.class
+com\dao\SupplierDao.class

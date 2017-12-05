@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("supplierDao")
 public class SupplierDaoImplementation implements SupplierDao
@@ -69,7 +70,7 @@ public class SupplierDaoImplementation implements SupplierDao
 	    session.getTransaction().commit();
 		return supplier;
 	}
-
+    @Transactional
 	@Override
 	public boolean updateSupplier(Supplier supplier)
 	{
@@ -78,7 +79,7 @@ public class SupplierDaoImplementation implements SupplierDao
 		{
 			   Session session = sessionFactory.openSession();
 			   session.beginTransaction();
-			   session.saveOrUpdate(supplier);
+			   session.update(supplier);
 			   session.getTransaction().commit();
 			   return true;
 		}

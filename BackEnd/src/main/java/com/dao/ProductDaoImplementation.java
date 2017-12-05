@@ -5,8 +5,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.model.Category;
 import com.model.Product;
 
 @Repository("productDao")
@@ -22,7 +26,7 @@ public class ProductDaoImplementation  implements ProductDao
 		{
 	    Session session = sessionFactory.openSession();
 	    session.beginTransaction();
-	    session.save(product);
+	    session.saveOrUpdate(product);
 	    session.getTransaction().commit();
 	    return true;
 		}
@@ -58,14 +62,13 @@ public class ProductDaoImplementation  implements ProductDao
 	@Override
 	public Product getProduct(int catId)
 	{
-		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 	    Product product = (Product) session.get(Product.class,catId);
 	    session.getTransaction().commit();
 		return product;
 	}
-
+    @Transactional
 	@Override
 	public boolean updateProduct(Product product)
 	{
@@ -73,7 +76,7 @@ public class ProductDaoImplementation  implements ProductDao
 		{
 			   Session session = sessionFactory.openSession();
 			   session.beginTransaction();
-			   session.saveOrUpdate(product);
+			   session.update(product);
 			   session.getTransaction().commit();
 			   return true;
 		}
@@ -82,6 +85,17 @@ public class ProductDaoImplementation  implements ProductDao
 		       return false;
 		}
 		
+	}
+
+	@Override
+	public List<Product> getProductByCategoryName(String catName)
+	{
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from Product where catName = :Name");
+		query.setParameter("Name", catName);
+		List<Product> product = query.list();
+		return product;
 	}
 
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.UserDao;
-
 import com.model.User;
 
 @Repository("userDao")
@@ -45,6 +44,19 @@ public class UserDaoImplementaion implements UserDao
 		return list;
 	}
 
+
+	@Override
+	public User getUserByEmail(String email)
+	{
+		User user = null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from User where email='"+email+"'");
+		user = (User)query.uniqueResult();
+		session.getTransaction().commit();
+		return user;
+		
+	}
 
 
 	

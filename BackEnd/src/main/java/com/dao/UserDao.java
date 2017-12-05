@@ -11,4 +11,5 @@ public interface UserDao
 {	
 	public void addUser(User user);
 	public List<User> retreiveuser();
+	public User getUserByEmail(String email); 
 }

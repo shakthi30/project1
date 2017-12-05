@@ -13,7 +13,9 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.model.Cart;
 import com.model.Category;
+import com.model.Order;
 import com.model.Product;
 import com.model.Supplier;
 import com.model.User;
@@ -23,7 +25,7 @@ import com.model.User;
 @ComponentScan("com")
 public class HibernateConfiguration 
 {
-	@Bean("dataSource")
+	@Bean(name="dataSource")
 	public DataSource getH2()
 	{
 
@@ -49,6 +51,8 @@ public class HibernateConfiguration
 		sb.addAnnotatedClass(Category.class);
 		sb.addAnnotatedClass(Product.class);
 		sb.addAnnotatedClass(Supplier.class);
+		sb.addAnnotatedClass(Cart.class);
+		sb.addAnnotatedClass(Order.class);
 		System.out.println(sb);
 		SessionFactory sessionFactory = sb.buildSessionFactory();
 		return sessionFactory;

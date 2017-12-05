@@ -91,7 +91,7 @@ public class CategoryDaoImplementation implements CategoryDao
 		{
 			   Session session = sessionFactory.openSession();
 			   session.beginTransaction();
-			   session.saveOrUpdate(category);
+			   session.update(category);
 			   session.getTransaction().commit();
 			   return true;
 		}
@@ -101,5 +101,8 @@ public class CategoryDaoImplementation implements CategoryDao
 		}
 
 	}
+
+
+
 
 }
